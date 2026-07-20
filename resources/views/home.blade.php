@@ -1,1 +1,7 @@
-<x-layout></x-layout>
+<x-layout>
+
+
+
+    <h1> home page</h1>
+
+</x-layout>

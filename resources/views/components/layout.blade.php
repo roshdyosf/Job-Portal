@@ -8,12 +8,10 @@
 </head>
 
 <body>
-    <nav>
-        <a href="/">home</a>
-        <a href="/about">about</a>
-        <a href="/contact">contact</a>
-    </nav>
-    <h1>contact page </h1>
+    <x-nav-link href="/">Home</x-nav-link>
+    <x-nav-link href="/about">About</x-nav-link>
+    <x-nav-link href="/contact">Contact</x-nav-link>
+    {{ $slot }}
 </body>
 
 </html>
