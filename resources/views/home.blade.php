@@ -2,6 +2,7 @@
 
 
 
-    <h1> home page</h1>
+    <x-slot:heading>Home</x-slot:heading>
+
 
 </x-layout>
