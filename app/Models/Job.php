@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Arr;
 
 class Job
 {
@@ -25,6 +26,11 @@ class Job
                 'salary' => '40,000$'
             ]
         ];
+    }
+    public static function find(int $id): ?Job
+    {
+        return Arr::first(self::all(), fn($item) => $item->id === $id);
+
     }
 }
 
