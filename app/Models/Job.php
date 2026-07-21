@@ -27,10 +27,13 @@ class Job
             ]
         ];
     }
-    public static function find(int $id): ?Job
+    public static function find(int $id): array
     {
-        return Arr::first(self::all(), fn($item) => $item->id === $id);
+        $job = Arr::first(static::all(), fn($job) => $job['id'] === $id);
+        if ($job)
+            return Arr::first(static::all(), fn($job) => $job['id'] === $id);
 
+        abort(404);
     }
 }
 
