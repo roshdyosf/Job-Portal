@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Tag;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Tag>
+ * @extends Factory<Post>
  */
-class TagFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
+            "subject" => fake()->sentence(),
         ];
     }
 }
