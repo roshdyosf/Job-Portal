@@ -5,19 +5,21 @@
         class="rounded-[2rem] border border-white/10 bg-slate-950/95 p-8 shadow-[0_0_80px_rgba(15,23,42,0.45)] backdrop-blur-lg">
 
 
-        <form method="POST" action="/jobs" class="mt-8 space-y-8">
+        <form method="Patch" action="/jobs/{{ $job->id }}" class="mt-8 space-y-8">
             @csrf
 
             <div class="grid gap-6 sm:grid-cols-2">
                 <label class="block">
                     <span class="text-sm font-semibold text-slate-200">Job title</span>
                     <input name="title" type="text" required placeholder={{$job->title ?? 'Senior Backend Engineer'}}
+                        value="{{ $job->title ?? '' }}"
                         class="mt-2 w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25" />
                 </label>
 
                 <label class="block">
                     <span class="text-sm font-semibold text-slate-200">Company / Employer</span>
                     <input name="company" type="text" placeholder={{$job->employer->name ?? 'Acme Labs'}}
+                        value="{{ $job->employer->name ?? '' }}"
                         class="mt-2 w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25" />
                 </label>
             </div>
@@ -43,6 +45,7 @@
                 <label class="block">
                     <span class="text-sm font-semibold text-slate-200">Salary-range</span>
                     <input name="salary" type="text" required placeholder={{$job->salary ?? '$80k - $120k'}}
+                        value="{{ $job->salary ?? '' }}"
                         class="mt-2 w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25" />
                 </label>
             </div>
@@ -75,7 +78,7 @@
                     <button type="submit"
                         class="inline-flex items-center justify-center rounded-3xl bg-indigo-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">Apply
                         Job</button>
-
+                    <x-button href="/jobs/{{ $job->id }}">Cancel</x-button>
                 </div>
         </form>
     </div>
