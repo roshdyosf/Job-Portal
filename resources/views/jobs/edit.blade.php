@@ -75,10 +75,21 @@
                 <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <button type="reset"
                         class="rounded-3xl border border-slate-700 bg-slate-900/85 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:bg-slate-800/95">Reset</button>
+                    <x-button href="/jobs/{{ $job->id }}">Cancel</x-button>
                     <button type="submit"
                         class="inline-flex items-center justify-center rounded-3xl bg-indigo-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">Update</button>
-                    <x-button href="/jobs/{{ $job->id }}">Cancel</x-button>
+
+                    <button form="delete-form"
+                        class="inline-flex items-center justify-center rounded-3xl bg-red-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">Delete</button>
+
                 </div>
+
+        </form>
+
+        <form method="POST" action="/jobs/{{ $job->id }}" id="delete-form" class="hidden"
+            onsubmit="return confirm('Are you sure you want to delete this job?');">
+            @csrf
+            @method('DELETE')
         </form>
     </div>
 </x-layout>
