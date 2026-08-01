@@ -3,7 +3,7 @@
 use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
-
+//home
 Route::get('/', function () {
     return view('home');
 
@@ -12,13 +12,15 @@ Route::get('/', function () {
 
 
 
-
+//contact
 Route::get('/contact', function () {
     return view('contact');
 });
+//______________________________________________________________
 
+//job routes
 
-//list all jobs
+//list all
 Route::get('/jobs', function () {
     $jobs = Job::with('employer')->latest()->simplePaginate(3);
     return view('jobs.index', [
@@ -26,12 +28,12 @@ Route::get('/jobs', function () {
     ]);
 });
 
-//create job
+//create
 Route::get('/jobs/create', function () {
     return view('jobs.create');
 });
 
-//store job
+//store
 Route::post('/jobs', function () {
     request()->validate([
         'title' => ['required', 'max:255', 'min:3'],
@@ -41,24 +43,43 @@ Route::post('/jobs', function () {
     return redirect('/jobs');
 });
 
-//show job
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
-    return view('jobs.show', ['job' => $job]);
 
-});
 
-//edit job
+//edit
 Route::get('/jobs/{id}/edit', function ($id) {
     $job = Job::find($id);
     return view('jobs.edit', ['job' => $job]);
 
 });
+
+//update
 Route::patch('/jobs/{id}', function ($id) {
+
+    //authorization ignored for now
+    request()->validate([
+        'title' => ['required', 'max:255', 'min:3'],
+        'salary' => ['required', 'max:255', 'min:2'],
+    ]);
+
+    $job = Job::findOrFail($id);
+    $job->update([
+        'title' => request('title'),
+        'salary' => request('salary')
+    ]);
+
+    return redirect('jobs/' . $job->id);
+
+});
+Route::delete('/jobs/{id}', function ($id) {
 
     dd(request()->all());
 
 });
 
 
+//show
+Route::get('/jobs/{id}', function ($id) {
+    $job = Job::find($id);
+    return view('jobs.show', ['job' => $job]);
 
+});
