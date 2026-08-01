@@ -58,8 +58,15 @@
 
 
                 <div class="rounded-3xl border border-white/10 bg-slate-900/70 p-5 text-sm text-slate-400">
-                    Keep the job post clear and concise. Strong listings highlight the title, company, location, type,
-                    salary range, and how applicants should apply.
+                    @if ($errors->any())
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li class="text-red-500">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="text-sm font-semibold text-slate-200">please ensure to enter a valid job information.</p>
+                    @endif
                 </div>
 
                 <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
