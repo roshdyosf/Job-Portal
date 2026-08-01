@@ -72,7 +72,11 @@ Route::patch('/jobs/{id}', function ($id) {
 });
 Route::delete('/jobs/{id}', function ($id) {
 
-    dd(request()->all());
+    //authorization ignored for now
+    $job = Job::findOrFail($id);
+    $job->delete();
+
+    return redirect('/jobs');
 
 });
 
