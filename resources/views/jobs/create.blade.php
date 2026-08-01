@@ -17,7 +17,7 @@
 
                 <label class="block">
                     <span class="text-sm font-semibold text-slate-200">Company / Employer</span>
-                    <input name="company" type="text" required placeholder="Acme Labs"
+                    <input name="company" type="text" placeholder="Acme Labs"
                         class="mt-2 w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25" />
                 </label>
             </div>
@@ -42,7 +42,7 @@
 
                 <label class="block">
                     <span class="text-sm font-semibold text-slate-200">Salary</span>
-                    <input name="salary" type="text" placeholder="$80k"
+                    <input name="salary" type="text" required placeholder="$80k"
                         class="mt-2 w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25" />
                 </label>
             </div>
@@ -50,9 +50,9 @@
             <div class="space-y-3">
                 <div class="flex items-center justify-between gap-4">
                     <span class="text-sm font-semibold text-slate-200">Job description</span>
-                    <span class="text-xs text-slate-500">Required</span>
+
                 </div>
-                <textarea name="description" rows="6" required
+                <textarea name="description" rows="6"
                     placeholder="Describe the role, responsibilities, and qualifications."
                     class="w-full rounded-[1.75rem] border border-slate-700 bg-slate-900/90 px-4 py-4 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25"></textarea>
 
