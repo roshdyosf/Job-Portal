@@ -23,6 +23,9 @@ Route::get('/contact', function () {
 Route::get('/jobs/create', function () {
     return view('jobs.create');
 });
+Route::post('/jobs', function () {
+    dd('hello');
+});
 
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
