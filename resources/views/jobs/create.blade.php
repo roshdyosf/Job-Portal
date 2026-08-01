@@ -41,8 +41,8 @@
                 </label>
 
                 <label class="block">
-                    <span class="text-sm font-semibold text-slate-200">Salary range</span>
-                    <input name="salary" type="text" placeholder="$80k–$120k"
+                    <span class="text-sm font-semibold text-slate-200">Salary</span>
+                    <input name="salary" type="text" placeholder="$80k"
                         class="mt-2 w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25" />
                 </label>
             </div>
