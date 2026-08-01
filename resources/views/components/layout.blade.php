@@ -86,12 +86,12 @@
                 <div class="border-t border-white/10 pt-4 pb-3">
                     <div class="flex items-center px-5">
                         <div class="shrink-0">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                alt="" class="size-10 rounded-full outline -outline-offset-1 outline-white/10" />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt=""
+                                class="size-10 rounded-full outline -outline-offset-1 outline-white/10" />
                         </div>
                         <div class="ml-3">
-                            <div class="text-base/5 font-medium text-white">Tom Cook</div>
-                            <div class="text-sm font-medium text-gray-400">tom@example.com</div>
+                            <div class="text-base/5 font-medium text-white">user name</div>
+                            <div class="text-sm font-medium text-gray-400">user@example.com</div>
                         </div>
                         <button type="button"
                             class="relative ml-auto shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
@@ -111,8 +111,12 @@
 
         <header
             class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
-            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:items-center sm:justify-between">
                 <h1 class="text-3xl font-bold tracking-tight text-white">{{$heading}}</h1>
+
+                <a href='/jobs/create'
+                    class="inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:active:bg-gray-700 dark:focus:border-blue-800 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-300">Create
+                    Job</a>
             </div>
         </header>
         <main>
