@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\RegisterUserController;
 
 /*
 --------------------------------------------------------------
@@ -19,8 +20,16 @@ Contact route
 
 Route::view('/contact', 'contact');
 
-Route::view('/register', 'users.register');
+
+/*
+--------------------------------------------------------------
+Auth routes
+--------------------------------------------------------------
+*/
+Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
 Route::view('/login', 'users.login');
+
+
 
 /*
 --------------------------------------------------------------
