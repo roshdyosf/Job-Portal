@@ -31,16 +31,8 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
-                            <button type="button"
-                                class="relative rounded-full p-1 text-slate-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-                                <span class="sr-only">View notifications</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    data-slot="icon" aria-hidden="true" class="size-6">
-                                    <path
-                                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
+                            <x-button href="/login" class="ml-2">Login</x-button>
+                            <x-button href="/register" class="ml-2">Register</x-button>
 
                             <div class="relative ml-3">
                                 <div
@@ -51,6 +43,8 @@
                         </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
+                        <x-button href="/login" class="ml-2">Login</x-button>
+                        <x-button href="/register" class="ml-2">Register</x-button>
                         <button type="button" command="--toggle" commandfor="mobile-menu"
                             class="relative inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
                             <span class="sr-only">Open main menu</span>
@@ -68,19 +62,22 @@
                 </div>
             </div>
 
-            <el-disclosure id="mobile-menu" hidden class="block md:hidden">
-                <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-                    <x-nav-link :mob="true" href="/" :active="request()->is('/')">Home</x-nav-link>
-                    <x-nav-link :mob="true" href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
-                    <x-nav-link :mob="true" href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
-                </div>
+
+            <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+                <x-nav-link :mob="true" href="/" :active="request()->is('/')">Home</x-nav-link>
+                <x-nav-link :mob="true" href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
+                <x-nav-link :mob="true" href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
+
+            </div>
             </el-disclosure>
         </nav>
 
         <header class="border-b border-white/10">
+
             <div
                 class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
                 <div>
+
                     <p class="text-sm font-semibold uppercase tracking-[0.3em] text-indigo-300">Job portal</p>
                     <h1 class="mt-2 text-3xl font-bold tracking-tight text-white">{{ $heading }}</h1>
                 </div>
