@@ -2,7 +2,7 @@
 
 use App\Models\Job;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\JobController;
 //home
 Route::get('/', function () {
     return view('home');
@@ -20,64 +20,27 @@ Route::get('/contact', function () {
 
 //job routes
 
-//list all
-Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->latest()->simplePaginate(3);
-    return view('jobs.index', [
-        'jobs' => $jobs
-    ]);
-});
+//index
+Route::get('/jobs', [JobController::class, 'index']);
+
 
 //create
-Route::get('/jobs/create', function () {
-    return view('jobs.create');
-});
+Route::get('/jobs/create', [JobController::class, 'create']);
+
 
 //store
-Route::post('/jobs', function () {
-    request()->validate([
-        'title' => ['required', 'max:255', 'min:3'],
-        'salary' => ['required', 'max:255', 'min:2'],
-    ]);
-    Job::create(['title' => request('title'), 'salary' => request('salary'), 'employer_id' => 1]);
-    return redirect('/jobs');
-});
-
+Route::Post('/jobs', [JobController::class, 'store']);
 
 
 //edit
-Route::get('/jobs/{job}/edit', function (Job $job) {
-    return view('jobs.edit', ['job' => $job]);
-
-});
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
 
 //update
-Route::patch('/jobs/{job}', function (Job $job) {
+Route::patch('/jobs/{job}', [JobController::class, 'update']);
 
-    //authorization ignored for now
-    request()->validate([
-        'title' => ['required', 'max:255', 'min:3'],
-        'salary' => ['required', 'max:255', 'min:2'],
-    ]);
 
-    $job->update(['title' => request('title'), 'salary' => request('salary')]);
-
-    return redirect('jobs/' . $job->id);
-
-});
-Route::delete('/jobs/{job}', function (Job $job) {
-
-    //authorization ignored for now
-    $job->delete();
-
-    return redirect('/jobs');
-
-});
-
+//destroy
+Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
 //show
-Route::get('/jobs/{job}', function (Job $job) {
-    //$job = Job::findOrFail($id);
-    return view('jobs.show', ['job' => $job]);
-
-});
+Route::get('/jobs/{job}', [JobController::class, 'show']);
