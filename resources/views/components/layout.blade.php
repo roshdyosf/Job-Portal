@@ -44,8 +44,6 @@
                         </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
-                        <x-button href="/login" class="ml-2">Login</x-button>
-                        <x-button href="/register" class="ml-2">Register</x-button>
                         <button type="button" command="--toggle" commandfor="mobile-menu"
                             class="relative inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
                             <span class="sr-only">Open main menu</span>
@@ -63,14 +61,19 @@
                 </div>
             </div>
 
+            <el-disclosure id="mobile-menu" hidden class="block md:hidden">
+                @guest
+                    <x-button href="/login" class="ml-2">Login</x-button>
+                    <x-button href="/register" class="ml-2">Register</x-button>
+                @endguest
+                <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+                    <x-nav-link :mob="true" href="/" :active="request()->is('/')">Home</x-nav-link>
+                    <x-nav-link :mob="true" href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
+                    <x-nav-link :mob="true" href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
 
-            <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-                <x-nav-link :mob="true" href="/" :active="request()->is('/')">Home</x-nav-link>
-                <x-nav-link :mob="true" href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
-                <x-nav-link :mob="true" href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
-
-            </div>
+                </div>
             </el-disclosure>
+
         </nav>
 
         <header class="border-b border-white/10">
