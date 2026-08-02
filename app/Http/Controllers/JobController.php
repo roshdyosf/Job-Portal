@@ -6,6 +6,7 @@ use App\Models\Job;
 
 class JobController extends Controller
 {
+
     public function index()
     {
         $jobs = Job::with('employer')->latest()->simplePaginate(3);
@@ -13,11 +14,11 @@ class JobController extends Controller
             'jobs' => $jobs
         ]);
     }
+
     public function create()
     {
         return view('jobs.create');
     }
-
 
     public function store()
     {
@@ -30,13 +31,11 @@ class JobController extends Controller
 
     }
 
-
     public function edit(Job $job)
     {
 
         return view('jobs.edit', ['job' => $job]);
     }
-
 
     public function update(Job $job)
     {
@@ -50,6 +49,7 @@ class JobController extends Controller
 
         return redirect('jobs/' . $job->id);
     }
+
     public function destroy(Job $job)
     {
         $job->delete();
