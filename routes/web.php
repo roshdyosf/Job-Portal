@@ -30,6 +30,7 @@ Route::get('/register', [RegisterUserController::class, 'create'])->name('regist
 Route::post('/register', [RegisterUserController::class, 'store'])->name('register.store');
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store'])->name('login.store');
+Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
 
 
