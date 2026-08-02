@@ -17,9 +17,10 @@
                     <div class="flex items-center">
                         <div class="shrink-0">
                             <div
-                                class="flex h-9 w-9 items-center justify-center rounded-2xl border border-indigo-500/30 bg-indigo-500/10 text-sm font-semibold text-indigo-300">
-                                JP
+                                class="inline-flex items-center justify-center rounded-3xl px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+                                JBP
                             </div>
+
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
@@ -35,6 +36,12 @@
                                 <x-button href="/login" class="ml-2">Login</x-button>
                                 <x-button href="/register" class="ml-2">Register</x-button>
                             @endguest
+                            @auth
+                                <form method="POST" action="/logout">
+                                    @csrf
+                                    <x-button type="submit" variant="ghost">Logout</x-button>
+                                </form>
+                            @endauth
                             <div class="relative ml-3">
                                 <div
                                     class="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-sm font-semibold text-slate-200">
@@ -44,28 +51,22 @@
                         </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
-                        <button type="button" command="--toggle" commandfor="mobile-menu"
-                            class="relative inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-                            <span class="sr-only">Open main menu</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                data-slot="icon" aria-hidden="true" class="size-6 in-aria-expanded:hidden">
-                                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                data-slot="icon" aria-hidden="true" class="size-6 not-in-aria-expanded:hidden">
-                                <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
+                        @guest
+                            <x-button href="/login" class="ml-2">Login</x-button>
+                            <x-button href="/register" class="ml-2">Register</x-button>
+                        @endguest
+                        @auth
+                            <form method="POST" action="/logout">
+                                @csrf
+                                <x-button type="submit" variant="ghost" class="mr-2 ">Logout</x-button>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             </div>
 
             <el-disclosure id="mobile-menu" hidden class="block md:hidden">
-                @guest
-                    <x-button href="/login" class="ml-2">Login</x-button>
-                    <x-button href="/register" class="ml-2">Register</x-button>
-                @endguest
+
                 <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                     <x-nav-link :mob="true" href="/" :active="request()->is('/')">Home</x-nav-link>
                     <x-nav-link :mob="true" href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
