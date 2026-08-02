@@ -31,9 +31,10 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
-                            <x-button href="/login" class="ml-2">Login</x-button>
-                            <x-button href="/register" class="ml-2">Register</x-button>
-
+                            @guest
+                                <x-button href="/login" class="ml-2">Login</x-button>
+                                <x-button href="/register" class="ml-2">Register</x-button>
+                            @endguest
                             <div class="relative ml-3">
                                 <div
                                     class="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-sm font-semibold text-slate-200">
