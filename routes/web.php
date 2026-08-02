@@ -16,28 +16,25 @@ Route::get('/', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
-//______________________________________________________________
-
-//job routes
-
+/*
+--------------------------------------------------------------
+job routes
+--------------------------------------------------------------
+*/
 //index
 Route::get('/jobs', [JobController::class, 'index']);
-
 
 //create
 Route::get('/jobs/create', [JobController::class, 'create']);
 
-
 //store
 Route::Post('/jobs', [JobController::class, 'store']);
-
 
 //edit
 Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
 
 //update
 Route::patch('/jobs/{job}', [JobController::class, 'update']);
-
 
 //destroy
 Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
