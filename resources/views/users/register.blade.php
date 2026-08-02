@@ -9,6 +9,10 @@
                 <x-form-label name="name" label="Full name" placeholder="Jane Doe" required autocomplete="name" />
                 <x-form-label name="email" label="Email address" type="email" placeholder="you@example.com" required
                     autocomplete="email" />
+                <x-select name="role" label="Account Type" :options="[
+        'employee' => 'Employee (Looking for a job)',
+        'employer' => 'Employer (Hiring)'
+    ]" :value="old('role')" />
             </div>
 
             <div class="grid gap-6 sm:grid-cols-2">
@@ -16,6 +20,7 @@
                     required autocomplete="new-password" />
                 <x-form-label name="password_confirmation" label="Confirm password" type="password"
                     placeholder="Repeat your password" required autocomplete="new-password" />
+
             </div>
 
             <x-form-error context="account" />

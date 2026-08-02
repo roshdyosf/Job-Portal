@@ -13,16 +13,8 @@
             <div class="grid gap-6 sm:grid-cols-3">
                 <x-form-label name="location" label="Location" placeholder="San Francisco, CA" />
 
-                <label class="block">
-                    <span class="text-sm font-semibold text-slate-200">Job type</span>
-                    <select name="type"
-                        class="mt-2 w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 shadow-inner shadow-black/20 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25">
-                        <option>Full-time</option>
-                        <option>Part-time</option>
-                        <option>Contract</option>
-                        <option>Internship</option>
-                    </select>
-                </label>
+                <x-select name="type" label="Job Type" :options="['Full-time', 'Part-time', 'Contract', 'Internship']"
+                    :value="old('type')" />
 
                 <x-form-label name="salary" label="Salary range" placeholder="$80k - $120k" required />
             </div>
