@@ -1,37 +1,43 @@
 <?php
 
-use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
-//home
-Route::get('/', function () {
-    return view('home');
 
-
-});
-
-
-
-//contact
-Route::get('/contact', function () {
-    return view('contact');
-});
 /*
 --------------------------------------------------------------
-job routes
+Home route
 --------------------------------------------------------------
 */
 
-Route::get('/jobs', [JobController::class, 'index']);
+Route::view('/', 'home');
 
-Route::get('/jobs/create', [JobController::class, 'create']);
+/*
+--------------------------------------------------------------
+Contact route
+--------------------------------------------------------------
+*/
 
-Route::Post('/jobs', [JobController::class, 'store']);
+Route::view('/contact', 'contact');
 
-Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
+/*
+--------------------------------------------------------------
+Job routes
+--------------------------------------------------------------
+*/
 
-Route::patch('/jobs/{job}', [JobController::class, 'update']);
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index');
+    Route::view('/jobs/create', 'create');
+    Route::post('/jobs', 'store');
+    Route::get('/jobs/{job}/edit', 'edit');
+    Route::patch('/jobs/{job}', 'update');
+    Route::delete('/jobs/{job}', 'destroy');
+    Route::get('/jobs/{job}', 'show');
+});
 
-Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
-Route::get('/jobs/{job}', [JobController::class, 'show']);
+
+
+
+
+
