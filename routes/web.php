@@ -19,6 +19,9 @@ Contact route
 
 Route::view('/contact', 'contact');
 
+Route::view('/register', 'users.register');
+Route::view('/login', 'users.login');
+
 /*
 --------------------------------------------------------------
 Job routes
