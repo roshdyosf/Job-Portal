@@ -6,8 +6,10 @@
             @csrf
 
             <div class="grid gap-6 sm:grid-cols-2">
-                <x-form-label name="first_name" label="First name" placeholder="Jane" required autocomplete="name" />
-                <x-form-label name="last_name" label="Last name" placeholder="Doe" required autocomplete="name" />
+                <x-form-label name="first_name" label="First name" placeholder="Jane" required autocomplete="name"
+                    id="first_name" />
+                <x-form-label name="last_name" label="Last name" placeholder="Doe" required autocomplete="name"
+                    id="last_name" />
                 <x-form-label name="email" label="Email address" type="email" placeholder="you@example.com" required
                     autocomplete="email" />
                 <x-select name="role" label="Account Type" :options="[
@@ -17,11 +19,11 @@
             </div>
 
             <div class="grid gap-6 sm:grid-cols-2">
-                <x-form-label name="password" label="Password" type="password" placeholder="Enter a strong password"
+                <x-form-input name="password" label="Password" type="password" placeholder="Enter a strong password"
                     required autocomplete="new-password" />
-                <x-form-label name="password_confirmation" label="Confirm password" type="password"
-                    placeholder="Repeat your password" required autocomplete="new-password" />
 
+                <x-form-input name="password_confirmation" label="Confirm password" type="password"
+                    placeholder="Repeat your password" required autocomplete="new-password" />
             </div>
 
             <x-form-error context="account" />
