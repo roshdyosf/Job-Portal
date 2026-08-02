@@ -6,7 +6,8 @@
             @csrf
 
             <div class="grid gap-6 sm:grid-cols-2">
-                <x-form-label name="name" label="Full name" placeholder="Jane Doe" required autocomplete="name" />
+                <x-form-label name="first_name" label="First name" placeholder="Jane" required autocomplete="name" />
+                <x-form-label name="last_name" label="Last name" placeholder="Doe" required autocomplete="name" />
                 <x-form-label name="email" label="Email address" type="email" placeholder="you@example.com" required
                     autocomplete="email" />
                 <x-select name="role" label="Account Type" :options="[
