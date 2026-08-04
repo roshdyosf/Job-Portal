@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Job;
 
 class JobController extends Controller
@@ -26,13 +26,19 @@ class JobController extends Controller
             'title' => ['required', 'max:255', 'min:3'],
             'salary' => ['required', 'max:255', 'min:2'],
         ]);
-        Job::create(['title' => request('title'), 'salary' => request('salary'), 'employer_id' => 1]);
+        Job::create(['title' => request('title'), 'salary' => request('salary'), 'employer_id' => Auth::user()->employer->id]);
         return redirect('/jobs');
 
     }
 
     public function edit(Job $job)
     {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+        if ($job->employer->user->isNot(Auth::user())) {
+            abort(403);
+        }
 
         return view('jobs.edit', ['job' => $job]);
     }
