@@ -20,10 +20,12 @@ class RegisterUserController extends Controller
             'first_name' => $request->string('first_name')->trim(),
             'last_name' => $request->string('last_name')->trim(),
             'email' => $request->string('email')->trim(),
-            'role' => $request->input('role'),
+            'account_type' => $request->input('account_type'),
             'password' => $request->input('password'),
         ]);
-
+        if ($request->input('account_type') === 'employer') {
+            $user->employer()->create(['name' => $request->input('first_name') . ' ' . $request->input('last_name')]);
+        }
         Auth::login($user);
 
         return redirect('/');
