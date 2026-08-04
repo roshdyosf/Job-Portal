@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Job;
+
 use App\Models\User;
 
 
@@ -31,7 +32,10 @@ class JobController extends Controller
         ]);
 
 
-        Job::create(['title' => request('title'), 'salary' => request('salary'), 'employer_id' => Auth::user()->employer->id]);
+        $job = Job::create(['title' => request('title'), 'salary' => request('salary'), 'employer_id' => Auth::user()->employer->id]);
+        \Illuminate\Support\Facades\Mail::to($job->employer->user)
+            ->send(new \App\Mail\JobPosted($job));
+
         return redirect('/jobs');
 
     }
