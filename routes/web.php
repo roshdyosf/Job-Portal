@@ -40,10 +40,20 @@ Job routes
 --------------------------------------------------------------
 */
 
-Route::resource('jobs', JobController::class);
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create')
+    ->middleware('auth');
 
+Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
+Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit')
+    ->middleware('auth')
+    ->can('edit-job', 'job');
 
+Route::patch('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update')
+    ->middleware('auth')
+    ->can('edit-job', 'job');
 
-
-
-
+Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy')
+    ->middleware('auth')
+    ->can('edit-job', 'job');

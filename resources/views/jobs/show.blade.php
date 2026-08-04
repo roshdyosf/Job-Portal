@@ -80,8 +80,9 @@
                 </div>
             </div>
             <br>
-            <x-button href="/jobs/{{ $job->id }}/edit">Edit Job</x-button>
-
+            @can('edit-job', $job)
+                <x-button href="/jobs/{{ $job->id }}/edit">Edit Job</x-button>
+            @endcan
         </div>
     @else
         <div
