@@ -12,10 +12,10 @@
                     id="last_name" />
                 <x-form-label name="email" label="Email address" type="email" placeholder="you@example.com" required
                     autocomplete="email" />
-                <x-select name="role" label="Account Type" :options="[
+                <x-select name="account_type" label="Account Type" :options="[
         'employee' => 'Employee (Looking for a job)',
         'employer' => 'Employer (Hiring)'
-    ]" :value="old('role')" />
+    ]" :value="old('account_type')" />
             </div>
 
             <div class="grid gap-6 sm:grid-cols-2">
