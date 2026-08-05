@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 </head>
 
 <body class="min-h-full text-slate-100">
@@ -15,11 +15,9 @@
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <div class="shrink-0">
-                            <div
-                                class="inline-flex items-center justify-center rounded-3xl px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 ">
+                            <div class="inline-flex  px-5 py-3 text-sm font-semibold transition">
                                 JBP
                             </div>
-
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
@@ -42,9 +40,11 @@
                                 </form>
                             @endauth
                             <div class="relative ml-3">
-                                <div
-                                    class="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-sm font-semibold text-slate-200">
-                                    U
+                                <div class="">
+                                    @auth
+                                        <x-button
+                                            class="ml-2">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</x-button>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
 
             <el-disclosure id="mobile-menu" hidden class="block md:hidden">
 
-                <div class="space-y-1 items-center justify-center px-7 pt-2 pb-3 sm:px-3">
+                <div class="space-y-1 items-center justify-center px-5 pt-2 pb-3 sm:px-3">
                     <x-nav-link :mob="true" href="/" :active="request()->is('/')">Home</x-nav-link>
                     <x-nav-link :mob="true" href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
                     <x-nav-link :mob="true" href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
