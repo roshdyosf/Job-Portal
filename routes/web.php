@@ -24,8 +24,11 @@ Home route
 --------------------------------------------------------------
 */
 
-Route::view('/', 'home');
+Route::get('/', function () {
+    $jobs = Job::with('employer')->latest()->take(2)->get();
 
+    return view('home', ['jobs' => $jobs]);
+});
 /*
 --------------------------------------------------------------
 Contact route

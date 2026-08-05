@@ -86,9 +86,11 @@
                     <p class="text-sm font-semibold uppercase tracking-[0.3em] text-indigo-300">Job portal</p>
                     <h1 class="mt-2 text-3xl font-bold tracking-tight text-white">{{ $heading }}</h1>
                 </div>
-                @can('create', App\Models\Job::class)
-                    <x-button href="/jobs/create">Create Job</x-button>
-                @endcan
+                @auth
+                    @can('create', App\Models\Job::class)
+                        <x-button href="/jobs/create">Create Job</x-button>
+                    @endcan
+                @endauth
             </div>
         </header>
 
