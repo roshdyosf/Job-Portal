@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css'])
 </head>
 
 <body class="min-h-full text-slate-100">
@@ -42,7 +42,7 @@
                             <div class="relative ml-3">
                                 <div class="">
                                     @auth
-                                        <x-button
+                                        <x-button href="/profile"
                                             class="ml-2">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</x-button>
                                     @endauth
                                 </div>

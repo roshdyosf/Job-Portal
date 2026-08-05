@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Models\Job;
 use App\Jobs\TranslateJob;
@@ -32,8 +33,17 @@ Contact route
 */
 
 Route::view('/contact', 'contact');
-
-
+/*
+--------------------------------------------------------------
+profile route
+--------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    // Controller renders the profile page and handles updates and deletion
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 /*
 --------------------------------------------------------------
 Auth routes
