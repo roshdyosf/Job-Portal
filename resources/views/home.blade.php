@@ -5,7 +5,7 @@
         <div class="rounded-[2rem] border border-white/10 bg-slate-950/95 p-8">
             <p class="text-sm font-semibold text-indigo-300">Welcome</p>
             <h2 class="mt-2 text-2xl font-bold text-white">Find your next job</h2>
-            <p class="mt-4 text-slate-300">This is a demo homepage with sample content. Use the Jobs page to view
+            <p class="mt-4 text-slate-300">Looking for a job? Check out the Jobs page to view
                 listings.</p>
             <div class="mt-4">
                 <x-button href="/jobs">Browse Jobs</x-button>
