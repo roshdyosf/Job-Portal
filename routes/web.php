@@ -5,6 +5,19 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
 use App\Models\Job;
+use App\Jobs\TranslateJob;
+
+
+Route::get("/translate/{job}", function (Job $job) {
+
+    TranslateJob::dispatch($job);
+
+
+
+    return response()->json([
+        'message' => 'Translation job queued successfully.'
+    ], 202);
+});
 /*
 --------------------------------------------------------------
 Home route
