@@ -11,9 +11,6 @@ use App\Jobs\TranslateJob;
 Route::get("/translate/{job}", function (Job $job) {
 
     TranslateJob::dispatch($job);
-
-
-
     return response()->json([
         'message' => 'Translation job queued successfully.'
     ], 202);
@@ -26,7 +23,6 @@ Home route
 
 Route::get('/', function () {
     $jobs = Job::with('employer')->latest()->take(2)->get();
-
     return view('home', ['jobs' => $jobs]);
 });
 /*

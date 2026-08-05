@@ -8,8 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body
-    class="min-h-full bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.18),_transparent_45%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-slate-100">
+<body class="min-h-full text-slate-100">
     <div class="min-h-full">
         <nav class="border-b border-white/10 bg-slate-950/70 backdrop-blur-lg">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -17,7 +16,7 @@
                     <div class="flex items-center">
                         <div class="shrink-0">
                             <div
-                                class="inline-flex items-center justify-center rounded-3xl px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+                                class="inline-flex items-center justify-center rounded-3xl px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 ">
                                 JBP
                             </div>
 
@@ -67,7 +66,7 @@
 
             <el-disclosure id="mobile-menu" hidden class="block md:hidden">
 
-                <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+                <div class="space-y-1 items-center justify-center px-7 pt-2 pb-3 sm:px-3">
                     <x-nav-link :mob="true" href="/" :active="request()->is('/')">Home</x-nav-link>
                     <x-nav-link :mob="true" href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
                     <x-nav-link :mob="true" href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
