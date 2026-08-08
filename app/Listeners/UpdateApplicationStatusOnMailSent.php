@@ -27,7 +27,7 @@ class UpdateApplicationStatusOnMailSent
             $applicationId = $headers->get('X-Application-ID')->getBodyAsString();
 
             Application::where('id', $applicationId)->update([
-                'status' => 'sent',
+                'is_sent' => true,
             ]);
         }
     }

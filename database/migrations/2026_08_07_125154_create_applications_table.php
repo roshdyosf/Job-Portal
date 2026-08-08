@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('job_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('cv_path');
-            $table->boolean('submitted')->default('false');
+            $table->boolean('is_sent')->default(false);
             $table->timestamps();
         });
     }

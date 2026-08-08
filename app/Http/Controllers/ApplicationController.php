@@ -15,6 +15,7 @@ class ApplicationController extends Controller
             'job_id' => $job->id,
             'user_id' => auth()->id,
             'cv_path' => $cvPath,
+
         ]);
         $application->load(['job', 'user']);
         Mail::to($job->employer->user)
