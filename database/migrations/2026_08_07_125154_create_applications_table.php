@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Job::class, 'job_listing_id')->constrained('job_listings')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('cv_path');
             $table->boolean('is_sent')->default(false);

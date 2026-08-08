@@ -11,18 +11,20 @@ class ApplicationController extends Controller
     public function store(ApplyToJobRequest $request, Job $job)
     {
         $cvPath = $request->file('cv')->store('cvs', 'local');
-        $application = Application::create([
-            'job_id' => $job->id,
-            'user_id' => auth()->id,
-            'cv_path' => $cvPath,
 
+        $application = Application::create([
+            'job_listing_id' => $job->id,
+            'user_id' => auth()->id(),
+            'cv_path' => $cvPath,
         ]);
+
         $application->load(['job', 'user']);
+
         Mail::to($job->employer->user)
             ->queue(new ApplicationSubmittedMail($application));
 
-        return response()->json([
-            'message' => 'Your application has been submitted successfully.'
-        ], 201);
+        return redirect()
+            ->route('jobs.show', $job)
+            ->with('success', 'Your application has been submitted successfully.');
     }
 }

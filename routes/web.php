@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\ProfileController;
@@ -73,6 +74,9 @@ Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store')
     ->middleware('auth')
     ->can('create', Job::class);
 Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store'])
+    ->name('jobs.apply')
+    ->middleware('auth');
 Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit')
     ->middleware('auth')
     ->can('edit', 'job');

@@ -30,8 +30,9 @@ class ApplicationSubmittedMail extends Mailable implements ShouldQueue
      */
     public function envelope(): Envelope
     {
+        $jobTitle = $this->application->job?->title ?? 'Position';
         return new Envelope(
-            subject: 'New Application for: ' . $this->application->job->title,
+            subject: 'New Application for: ' . $jobTitle,
         );
     }
 

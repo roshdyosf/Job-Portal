@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     protected $fillable = [
-        'job_id',
+        'job_listing_id',
         'user_id',
         'cv_path',
         'is_sent',
@@ -17,7 +17,7 @@ class Application extends Model
     ];
     public function job()
     {
-        return $this->belongsTo(Job::class);
+        return $this->belongsTo(Job::class)->withTrashed();
     }
     public function user()
     {

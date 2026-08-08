@@ -12,7 +12,7 @@ class ApplyToJobRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -23,7 +23,6 @@ class ApplyToJobRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'job_id' => ['required', 'exists:job,id'],
             'cv' => ['required', 'file', 'mimes:pdf', 'max:5120'], // Max 5MB PDF
         ];
     }
