@@ -11,6 +11,8 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Application;
+use Illuminate\Mail\Mailables\Headers;
+
 class ApplicationSubmittedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
@@ -42,7 +44,14 @@ class ApplicationSubmittedMail extends Mailable implements ShouldQueue
             markdown: 'mail.application',
         );
     }
-
+    public function headers(): Headers
+    {
+        return new Headers(
+            text: [
+                'X-Application-ID' => (string) $this->application->id,
+            ],
+        );
+    }
     /**
      * Get the attachments for the message.
      *

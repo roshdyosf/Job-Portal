@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Mail\Events\MessageSent;
+use App\Listeners\UpdateApplicationStatusOnMailSent;
 use Illuminate\Support\ServiceProvider;
-use App\Models\User;
-use App\Models\Job;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +24,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::preventLazyLoading();
 
-
+        Event::listen(
+            MessageSent::class,
+            UpdateApplicationStatusOnMailSent::class
+        );
 
         // Gate::define('edit-job', function (User $user, Job $job) {
         //     return $job->employer->user->is($user);
