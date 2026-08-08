@@ -79,53 +79,54 @@
                     </div>
                 </div>
             </div>
-
-            <div class="mt-8 rounded-[1.75rem] border border-slate-700 bg-slate-900/90 p-6">
-                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Apply for this job</p>
-                        <h3 class="text-xl font-semibold text-white">Upload your CV to send to the employer</h3>
-                    </div>
-                    <span
-                        class="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-sm font-semibold text-indigo-300">
-                        PDF only
-                    </span>
-                </div>
-
-                @if (session('success'))
-                    <div class="mt-6 rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-200">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @auth
-                    <x-form-card>
-                        <form method="POST" action="{{ route('jobs.apply', $job) }}" enctype="multipart/form-data"
-                            class="space-y-6">
-                            @csrf
-
-                            <x-form-label name="cv" label="Upload CV" type="file" required
-                                help="Attach your CV as a PDF file, up to 5MB." />
-
-                            <x-form-error context="CV" />
-
-                            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                <x-button type="submit" variant="primary">Apply Now</x-button>
-                                <p class="text-sm text-slate-400">Your CV will be sent directly to the employer.</p>
-                            </div>
-                        </form>
-                    </x-form-card>
-                @else
-                    <div class="mt-6 rounded-[1.5rem] border border-slate-800 bg-slate-950/60 p-6 text-slate-300">
-                        <p class="text-base leading-7 text-slate-300">You need to be signed in to apply for this position.</p>
-                        <div class="mt-4 flex flex-wrap gap-3">
-                            <x-button href="{{ route('login') }}">Login</x-button>
-                            <x-button href="{{ route('register') }}" variant="ghost">Register</x-button>
+            @can('apply', $job)
+                <div class="mt-8 rounded-[1.75rem] border border-slate-700 bg-slate-900/90 p-6">
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Apply for this job</p>
+                            <h3 class="text-xl font-semibold text-white">Upload your CV to send to the employer</h3>
                         </div>
+                        <span
+                            class="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-sm font-semibold text-indigo-300">
+                            PDF only
+                        </span>
                     </div>
-                @endauth
-            </div>
 
+                    @if (session('success'))
+                        <div class="mt-6 rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-200">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @auth
+                        <x-form-card>
+                            <form method="POST" action="{{ route('jobs.apply', $job) }}" enctype="multipart/form-data"
+                                class="space-y-6">
+                                @csrf
+
+                                <x-form-label name="cv" label="Upload CV" type="file" required
+                                    help="Attach your CV as a PDF file, up to 5MB." />
+
+                                <x-form-error context="CV" />
+
+                                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                    <x-button type="submit" variant="primary">Apply Now</x-button>
+                                    <p class="text-sm text-slate-400">Your CV will be sent directly to the employer.</p>
+                                </div>
+
+                            </form>
+                        </x-form-card>
+                    @else
+                        <div class="mt-6 rounded-[1.5rem] border border-slate-800 bg-slate-950/60 p-6 text-slate-300">
+                            <p class="text-base leading-7 text-slate-300">You need to be signed in to apply for this position.</p>
+                            <div class="mt-4 flex flex-wrap gap-3">
+                                <x-button href="{{ route('login') }}">Login</x-button>
+                                <x-button href="{{ route('register') }}" variant="ghost">Register</x-button>
+                            </div>
+                        </div>
+                    @endauth
+                </div>
+            @endcan
             <br>
             @can('edit', $job)
                 <x-button href="/jobs/{{ $job->id }}/edit">Edit Job</x-button>
