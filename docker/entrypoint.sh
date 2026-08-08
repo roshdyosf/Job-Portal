@@ -1,14 +1,17 @@
 #!/bin/sh
 set -e
 
-if [ ! -f database/database.sqlite ]; then
-  touch database/database.sqlite
+if [ ! -f /var/www/database/database.sqlite ]; then
+    touch /var/www/database/database.sqlite
 fi
 
-chown -R www-data:www-data storage bootstrap/cache database
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache /var/www/database
 
 php artisan migrate --force
 php artisan config:cache
+php artisan route:cache
+php artisan view:cache
 
-php-fpm &
+php-fpm -D
 nginx -g 'daemon off;'

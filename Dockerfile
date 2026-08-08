@@ -1,49 +1,46 @@
-FROM node:20 AS node-build
-
-WORKDIR /var/www
-
-COPY package*.json vite.config.js ./
-COPY resources ./resources
-COPY public ./public
-
-RUN npm install
+# Stage 1: Build Frontend Assets
+FROM node:20-alpine AS node-build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
 RUN npm run build
 
-FROM php:8.4-fpm AS app
+# Stage 2: PHP + Nginx Environment
+FROM php:8.2-fpm
 
-RUN apt-get update && apt-get install -y \
-    git \
-    libpng-dev \
-    libzip-dev \
-    libsqlite3-dev \
-    libonig-dev \
-    sqlite3 \
-    pkg-config \
-    zip \
-    unzip \
-    nginx \
-    && export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig \
-    && docker-php-ext-configure zip \
-    && docker-php-ext-install pdo_mysql pdo_sqlite bcmath mbstring zip \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Install Extension Installer (Prevents missing C-library build errors)
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
+# Install Nginx, Git, Zip tools + PHP Extensions automatically
+RUN apt-get update && apt-get install -y nginx git zip unzip \
+    && install-php-extensions pdo_mysql pdo_sqlite bcmath mbstring zip gd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-COPY composer.json composer.lock* artisan ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+# Copy Project Files
+COPY . /var/www
 
-COPY . ./
-COPY --from=node-build /var/www/public/build ./public/build
+# Copy Compiled Assets from Stage 1
+COPY --from=node-build /app/public/build /var/www/public/build
 
-RUN touch database/database.sqlite \
-    && chown -R www-data:www-data storage bootstrap/cache database
+# Install PHP Dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# Set Permissions
+RUN touch /var/www/database/database.sqlite \
+    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache /var/www/database
+
+# Setup Nginx & Entrypoint
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 80
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
