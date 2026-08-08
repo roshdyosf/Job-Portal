@@ -14,5 +14,5 @@ A new candidate has just submitted an application for your job listing.
 The candidate's CV is attached to this email as a PDF file for your review.
 
 Thanks,<br>
-{{ config('app.name') }}
+JOB PORTAL
 @endcomponent
