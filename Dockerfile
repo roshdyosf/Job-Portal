@@ -6,10 +6,10 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: PHP + Nginx Environment
+# Stage 2: PHP 8.4 + Nginx Environment
 FROM php:8.4-fpm
 
-# Install Extension Installer (Prevents missing C-library build errors)
+# Install Extension Installer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
 # Install Nginx, Git, Zip tools + PHP Extensions automatically
@@ -37,6 +37,8 @@ RUN touch /var/www/database/database.sqlite \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache /var/www/database
 
 # Setup Nginx & Entrypoint
+RUN rm -rf /etc/nginx/sites-enabled/default /etc/nginx/conf.d/default.conf
+
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
