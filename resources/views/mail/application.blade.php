@@ -1,26 +1,18 @@
 @component('mail::message')
 # New Application Received
 
-A new candidate has just submitted an application for your listing.
+A new candidate has just submitted an application for your job listing.
 
 @component('mail::panel')
-**Position:** {{ $application->job->title }}
+**Position:** {{ $application->job?->title ?? 'N/A' }}
 
-**Applicant Name:** {{ $application->user->first_name . ' ' . $application->user->last_name }}
+**Applicant Name:** {{ $application->user?->first_name . ' ' . $application->user?->last_name }}
 
-**Applicant Email:** {{ $application->user->email }}
+**Applicant Email:** {{ $application->user?->email }}
 @endcomponent
 
-A candidate's CV is attached and can also be opened directly from the button below.
+The candidate's CV is attached to this email as a PDF file for your review.
 
-@component('mail::button', ['url' => $cvUrl])
-View Applicant CV
-@endcomponent
-
-If the button does not work, copy and paste this link into your browser:
-
-{{ $cvUrl }}
-
-Thanks,
-{{ config('app.name') }} Team
+Thanks,<br>
+{{ config('app.name') }}
 @endcomponent

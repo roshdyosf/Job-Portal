@@ -60,10 +60,12 @@ class ApplicationSubmittedMail extends Mailable implements ShouldQueue
      */
     public function attachments(): array
     {
+        $extension = pathinfo($this->application->cv_path, PATHINFO_EXTENSION);
+        $safeApplicantName = str_replace(' ', '_', $this->application->user->name);
+
         return [
-            Attachment::fromPath(Storage::disk('local')->path($this->application->cv_path))
-                ->as('CV_' . str_replace(' ', '_', $this->application->user->name) . '.pdf')
-                ->withMime('application/pdf'),
+            Attachment::fromStorageDisk('local', $this->application->cv_path)
+                ->as("CV_{$safeApplicantName}.{$extension}"),
         ];
     }
 }
