@@ -17,7 +17,7 @@ class Application extends Model
     ];
     public function job()
     {
-        return $this->belongsTo(Job::class)->withTrashed();
+        return $this->belongsTo(Job::class, 'job_listing_id');
     }
     public function user()
     {
