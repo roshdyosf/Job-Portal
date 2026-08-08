@@ -1,7 +1,8 @@
 # Job Portal
 
-<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/f778feb1-75da-4964-8757-7a3851605d5a" />
 <img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/06d9deb4-ba64-407c-add1-4ae2a7ce5eab" />
+
+<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/f778feb1-75da-4964-8757-7a3851605d5a" />
 
 A Laravel-based job portal application for posting job listings and receiving candidate applications with CV attachments.
 
