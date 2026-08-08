@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: PHP + Nginx Environment
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
 # Install Extension Installer (Prevents missing C-library build errors)
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
