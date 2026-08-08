@@ -9,7 +9,7 @@ COPY public ./public
 RUN npm install
 RUN npm run build
 
-FROM php:8.2-fpm AS app
+FROM php:8.4-fpm AS app
 
 RUN apt-get update && apt-get install -y \
     git \
