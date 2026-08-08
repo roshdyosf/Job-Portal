@@ -16,10 +16,12 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libzip-dev \
     libsqlite3-dev \
+    sqlite3 \
     pkg-config \
     zip \
     unzip \
     nginx \
+    && export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig \
     && docker-php-ext-configure zip \
     && docker-php-ext-install pdo_mysql pdo_sqlite bcmath mbstring zip \
     && apt-get clean \
