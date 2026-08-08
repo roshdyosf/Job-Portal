@@ -8,7 +8,7 @@ fi
 chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database
 chmod -R 775 /var/www/storage /var/www/bootstrap/cache /var/www/database
 
-php artisan migrate --seed --force
+php artisan migrate --force
 
 php artisan config:cache
 php artisan route:cache
