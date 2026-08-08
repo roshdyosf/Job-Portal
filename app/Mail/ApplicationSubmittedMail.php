@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Application;
-class ApplicationSubmittedMail extends Mailable
+class ApplicationSubmittedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -39,12 +39,7 @@ class ApplicationSubmittedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'view.emails.application',
-            with: [
-                'applicationName' => $this->application->user->name,
-                'applicantEmail' => $this->application->user->email,
-                'jobTitle' => $this->application->jobPost->title
-            ]
+            markdown: 'mail.application',
         );
     }
 
@@ -57,7 +52,7 @@ class ApplicationSubmittedMail extends Mailable
     {
         return [
             Attachment::fromPath(Storage::disk('local')->path($this->application->cv_path))
-                ->as('CV_' . str_replace(' ', '_', $this->application->applicant->name) . '.pdf')
+                ->as('CV_' . str_replace(' ', '_', $this->application->user->name) . '.pdf')
                 ->withMime('application/pdf'),
         ];
     }
