@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libzip-dev \
     libsqlite3-dev \
+    libonig-dev \
     sqlite3 \
     pkg-config \
     zip \
