@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
     git \
     libpng-dev \
     libzip-dev \
+    libsqlite3-dev \
+    pkg-config \
     zip \
     unzip \
     nginx \
